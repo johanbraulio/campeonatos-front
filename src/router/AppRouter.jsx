@@ -1,13 +1,8 @@
 import { HashRouter, Routes, Route, BrowserRouter, Navigate } from "react-router-dom"
 import { useAppStore } from "../store/useAppStore"
-import Cart from "../pages/Cart"
 import Login from "../pages/Login"
 import Home from "../pages/Home"
-import Profile from "../pages/Profile"
-import Products from "../pages/Products"
-import MyPurchases from "../pages/MyPurchases"
 import Unauthorized from "../pages/Unauthorized"
-import PanelAdmin from "../pages/panelAdmin"
 import Page404 from "../pages/Page404"
 import Navbar from "../components/layout/Navbar"
 import ListadoPartidosPage from "../pages/Partidos/Listado"
@@ -32,59 +27,19 @@ const AppRouter = () => {
                     />
 
                     <Route
-                        path="/profile"
-                        element={
-                            user === null ?
-                                <Navigate to="/login" />
-                                :
-                                <Profile />
-                        }
-                    />
-
-                    <Route
-                        path="/products"
-                        element={
-                            user === null ?
-                                <Navigate to="/login" />
-                                :
-                                <Products />
-                        }
-                    />
-
-                    <Route
-                        path="/miscompras"
-                        element={
-                            user === null ?
-                                <Navigate to="/login" />
-                                :
-                                <MyPurchases />
-                        }
-                    />
-
-                    <Route
                         path="/panel-admin"
                         element={
                             user === null ?
                                 <Navigate to="/login" />
                                 :
-                                hasRole(["admin", "editor", "manager", "finance", "RRHH"]) ?
-                                    <PanelAdmin />
+                                hasRole(["ADMIN"/* , "editor", "manager", "finance", "RRHH" */]) ?
+                                    <ListadoPartidosPage />
                                     :
                                     <Unauthorized />
                         }
                     />
 
-                    <Route
-                        path="/cart"
-                        element={
-                            user === null ?
-                                <Navigate to="/login" />
-                                :
-                                <Cart />
-                        }
-                    />
-
-                    <Route
+                    {/* <Route
                         path="/partidos"
                         element={
                             user === null ?
@@ -92,7 +47,7 @@ const AppRouter = () => {
                                 :
                                 <ListadoPartidosPage />
                         }
-                    />
+                    /> */}
 
                     <Route
                         path="*"

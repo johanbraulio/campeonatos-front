@@ -23,7 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         if (user !== null) {
-            navigate("/partidos")
+            navigate("/panel-admin")
         }
     }, [user])
 

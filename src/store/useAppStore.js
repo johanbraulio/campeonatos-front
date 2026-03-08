@@ -22,7 +22,10 @@ export const useAppStore = create(
                     })
                     if (respuesta?.data?.token) {
                         set({
-                            user: respuesta?.data?.nombre,
+                            user: {
+                                name: respuesta?.data?.nombre,
+                                role: respuesta?.data?.rol,
+                            },
                             token: respuesta?.data?.token
                         })
                     }
@@ -62,55 +65,6 @@ export const useAppStore = create(
             updateUser: (newDataUser) => set((state) => ({
                 user: { ...state.user, ...newDataUser }
             })),
-            /* addToCart: (product) => {
-                set((state) => {
-                    const existingItem = state.cart.find(item => item.product.id == product.id)
-                    if (existingItem) {
-                        Swal.fire({
-                            title: "Ya tienes este producto en el carrito",
-                            icon: "warning",
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true
-                        })
-                        return {
-                            cart: [...state.cart]
-                        }
-                    }
-                    else {
-                        Swal.fire({
-                            title: "Agregado al carrito",
-                            icon: "success",
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true
-                        })
-                        return {
-                            cart: [...state.cart, { product, quantity: 1 }]
-                        }
-                    }
-                })
-            },
-            updateQuantity: (productId, newQuantity) => set((state) => ({
-                cart: state.cart.map(item =>
-                    item.product.id == productId ?
-                        { ...item, quantity: Math.max(1, newQuantity) }
-                        :
-                        item
-                )
-            })),
-            removeFromCart: (productId) => set((state) => ({
-                cart: state.cart.filter(item => item.product.id !== productId)
-            })),
-            clearCart: () => set(
-                {
-                    cart: []
-                }
-            ) */
         }),
         {
             name: "info-profile",

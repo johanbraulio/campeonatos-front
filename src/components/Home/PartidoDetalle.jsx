@@ -85,11 +85,11 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                 )}
                                 <div className="flex items-center gap-3">
                                     <div className="bg-slate-800 px-4 py-2 rounded text-2xl font-black text-white w-16 text-center shadow-inner">
-                                        {detalle.esWO ? "-" : detalle.golesA}
+                                        {detalle.golesA}
                                     </div>
                                     <span className="text-slate-500 font-bold">vs</span>
                                     <div className="bg-slate-800 px-4 py-2 rounded text-2xl font-black text-white w-16 text-center shadow-inner">
-                                        {detalle.esWO ? "-" : detalle.golesB}
+                                        {detalle.golesB}
                                     </div>
                                 </div>
                             </div>
@@ -122,9 +122,9 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                             <thead className="bg-slate-800/50 text-slate-400 text-xs uppercase">
                                                 <tr>
                                                     <th className="px-4 py-2">Jugador</th>
-                                                    <th className="px-4 py-2 text-center w-16">⚽</th>
-                                                    <th className="px-4 py-2 text-center w-16">🟨</th>
-                                                    <th className="px-4 py-2 text-center w-16">🟥</th>
+                                                    <th className="px-4 py-2 text-center w-16">Goles</th>
+                                                    <th className="px-4 py-2 text-center w-16">T.A.</th>
+                                                    <th className="px-4 py-2 text-center w-16">T.R.</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-slate-700/50">
@@ -151,9 +151,9 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                             <thead className="bg-slate-800/50 text-slate-400 text-xs uppercase">
                                                 <tr>
                                                     <th className="px-4 py-2">Jugador</th>
-                                                    <th className="px-4 py-2 text-center w-16">⚽</th>
-                                                    <th className="px-4 py-2 text-center w-16">🟨</th>
-                                                    <th className="px-4 py-2 text-center w-16">🟥</th>
+                                                    <th className="px-4 py-2 text-center w-16">Goles</th>
+                                                    <th className="px-4 py-2 text-center w-16">T.A.</th>
+                                                    <th className="px-4 py-2 text-center w-16">T.R.</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-slate-700/50">

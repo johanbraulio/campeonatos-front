@@ -37,9 +37,7 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
         ganadorNombre,
         golesA,
         golesB,
-        tiempoExtra,
-        penales,
-        esWO,
+        esWo,
     } = partido;
 
     const estado = estadoConfig[estadoPartido] ?? estadoConfig["PENDIENTE"];
@@ -59,6 +57,11 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
                 <span className="text-xs text-slate-500">
                     {formatFecha(fechaHora)} · {formatHora(fechaHora)}
                 </span>
+                {esWo ? (
+                    <div className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded text-amber-500 bg-amber-500/10 border border-amber-500/30">
+                        W.O.
+                    </div>
+                ) : null}
                 <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded ${estado.color} ${estado.bg}`}>
                     {estado.icon}
                     {estado.label}
@@ -70,12 +73,12 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
                 {/* Equipo A */}
                 <div className={`flex-1 text-right ${finalizado && !esGanadorA ? "opacity-50" : ""}`}>
-                    {esGanadorA && (
-                        <div className="flex items-center justify-end gap-1 mb-0.5">
-                            <Trophy className="w-3 h-3 text-yellow-400" />
-                        </div>
-                    )}
                     <p className={`text-sm font-semibold leading-tight ${esGanadorA ? "text-white" : "text-slate-300"}`}>
+                        {esGanadorA && (
+                            <div className="flex items-center justify-end gap-1 mb-0.5">
+                                <Trophy className="w-3 h-3 text-yellow-400" />
+                            </div>
+                        )}
                         {equipoANombre}
                     </p>
                 </div>
@@ -84,26 +87,19 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
                 <div className="shrink-0 text-center flex flex-col items-center">
                     {hayMarcador ? (
                         <>
-                            {esWO ? (
-                                <div className="bg-amber-500/10 text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded text-xs font-bold tracking-wider mb-1">
-                                    W.O.
-                                </div>
-                            ) : null}
                             <div className="flex items-center gap-1">
                                 <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorA ? "text-white" : "text-slate-400"}`}>
-                                    {esWO ? "-" : golesA}
+                                    {golesA}
                                 </span>
                                 <span className="text-slate-600 text-sm">-</span>
                                 <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorB ? "text-white" : "text-slate-400"}`}>
-                                    {esWO ? "-" : golesB}
+                                    {golesB}
                                 </span>
                             </div>
                         </>
                     ) : (
                         <span className="text-slate-600 text-sm font-medium">vs</span>
                     )}
-                    {tiempoExtra && !esWO && <p className="text-[10px] text-slate-500 mt-0.5">Prórroga</p>}
-                    {penales && !esWO && <p className="text-[10px] text-slate-500 mt-0.5">Penales</p>}
                 </div>
 
                 {/* Equipo B */}
