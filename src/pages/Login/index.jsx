@@ -23,7 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         if (user !== null) {
-            navigate("/products")
+            navigate("/partidos")
         }
     }, [user])
 

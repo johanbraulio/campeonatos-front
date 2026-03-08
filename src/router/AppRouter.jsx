@@ -10,6 +10,7 @@ import Unauthorized from "../pages/Unauthorized"
 import PanelAdmin from "../pages/panelAdmin"
 import Page404 from "../pages/Page404"
 import Navbar from "../components/layout/Navbar"
+import ListadoPartidosPage from "../pages/Partidos/Listado"
 
 const AppRouter = () => {
 
@@ -80,6 +81,16 @@ const AppRouter = () => {
                                 <Navigate to="/login" />
                                 :
                                 <Cart />
+                        }
+                    />
+
+                    <Route
+                        path="/partidos"
+                        element={
+                            user === null ?
+                                <Navigate to="/login" />
+                                :
+                                <ListadoPartidosPage />
                         }
                     />
 

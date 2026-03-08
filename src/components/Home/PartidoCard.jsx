@@ -1,4 +1,5 @@
 import { Clock, CheckCircle2, Trophy } from "lucide-react";
+import { useState } from "react";
 
 const estadoConfig = {
     PENDIENTE: {
@@ -27,7 +28,7 @@ const formatFecha = (fechaIso) => {
     return date.toLocaleDateString("es-PE", { day: "2-digit", month: "short" });
 };
 
-const PartidoCard = ({ partido }) => {
+const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
     const {
         equipoANombre,
         equipoBNombre,
@@ -38,6 +39,7 @@ const PartidoCard = ({ partido }) => {
         golesB,
         tiempoExtra,
         penales,
+        esWO,
     } = partido;
 
     const estado = estadoConfig[estadoPartido] ?? estadoConfig["PENDIENTE"];
@@ -45,6 +47,9 @@ const PartidoCard = ({ partido }) => {
     const hayMarcador = golesA !== null && golesB !== null;
     const esGanadorA = ganadorNombre === equipoANombre;
     const esGanadorB = ganadorNombre === equipoBNombre;
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
 
     return (
         <div className="rounded-lg border border-slate-700 bg-slate-900 flex flex-col">
@@ -76,22 +81,29 @@ const PartidoCard = ({ partido }) => {
                 </div>
 
                 {/* Marcador */}
-                <div className="shrink-0 text-center">
+                <div className="shrink-0 text-center flex flex-col items-center">
                     {hayMarcador ? (
-                        <div className="flex items-center gap-1">
-                            <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorA ? "text-white" : "text-slate-400"}`}>
-                                {golesA}
-                            </span>
-                            <span className="text-slate-600 text-sm">-</span>
-                            <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorB ? "text-white" : "text-slate-400"}`}>
-                                {golesB}
-                            </span>
-                        </div>
+                        <>
+                            {esWO ? (
+                                <div className="bg-amber-500/10 text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded text-xs font-bold tracking-wider mb-1">
+                                    W.O.
+                                </div>
+                            ) : null}
+                            <div className="flex items-center gap-1">
+                                <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorA ? "text-white" : "text-slate-400"}`}>
+                                    {esWO ? "-" : golesA}
+                                </span>
+                                <span className="text-slate-600 text-sm">-</span>
+                                <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorB ? "text-white" : "text-slate-400"}`}>
+                                    {esWO ? "-" : golesB}
+                                </span>
+                            </div>
+                        </>
                     ) : (
                         <span className="text-slate-600 text-sm font-medium">vs</span>
                     )}
-                    {tiempoExtra && <p className="text-[10px] text-slate-500 mt-0.5">Prórroga</p>}
-                    {penales && <p className="text-[10px] text-slate-500 mt-0.5">Penales</p>}
+                    {tiempoExtra && !esWO && <p className="text-[10px] text-slate-500 mt-0.5">Prórroga</p>}
+                    {penales && !esWO && <p className="text-[10px] text-slate-500 mt-0.5">Penales</p>}
                 </div>
 
                 {/* Equipo B */}
@@ -107,15 +119,20 @@ const PartidoCard = ({ partido }) => {
                 </div>
             </div>
 
-            {/* Botón detalle */}
-            <div className="border-t border-slate-700 px-3 py-2">
-                <button
-                    className="w-full text-xs text-slate-400 hover:text-slate-200 py-1 hover:bg-slate-700/50 rounded transition-colors cursor-pointer"
-                    onClick={() => { /* TODO: ver detalle */ }}
-                >
-                    Ver detalles
-                </button>
-            </div>
+            {/* Botón detalle - Solo si el partido ya se jugó */}
+            {finalizado && (
+                <div className="border-t border-slate-700 px-3 py-2">
+                    <button
+                        className="w-full text-xs text-slate-400 hover:text-slate-200 py-1 hover:bg-slate-700/50 rounded transition-colors cursor-pointer flex items-center justify-center gap-1"
+                        onClick={() => {
+                            handlePartidoDetalle(true)
+                            handlePartido(partido)
+                        }}
+                    >
+                        Ver detalles
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

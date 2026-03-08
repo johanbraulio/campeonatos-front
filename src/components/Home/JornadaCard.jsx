@@ -2,7 +2,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import PartidoCard from "./PartidoCard";
 
-const JornadaCard = ({ jornada }) => {
+const JornadaCard = ({ jornada, handlePartido, handlePartidoDetalle }) => {
     const [expandido, setExpandido] = useState(true);
     const { nombre, partidos = [] } = jornada;
 
@@ -38,7 +38,7 @@ const JornadaCard = ({ jornada }) => {
             {expandido && (
                 <div className="border-t border-slate-700 p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                     {partidos.map((partido) => (
-                        <PartidoCard key={partido.id} partido={partido} />
+                        <PartidoCard key={partido.id} partido={partido} handlePartido={handlePartido} handlePartidoDetalle={handlePartidoDetalle} />
                     ))}
                 </div>
             )}

@@ -4,6 +4,7 @@ import axios from "axios";
 import JornadaCard from "@/components/Home/JornadaCard";
 import TablaPosiciones from "@/components/Home/TablaPosiciones";
 import { Loader2, AlertTriangle, CalendarDays, BarChart3 } from "lucide-react";
+import PartidoDetalle from "@/components/Home/PartidoDetalle";
 
 const TABS = [
     { key: "jornadas", label: "Jornadas", icon: CalendarDays },
@@ -16,6 +17,8 @@ const Home = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [tabActivo, setTabActivo] = useState("jornadas")
+    const [show, setShow] = useState(false)
+    const [partido, setPartido] = useState(null)
 
     useEffect(() => {
         const fetchDatos = async () => {
@@ -30,7 +33,7 @@ const Home = () => {
                 setPosiciones(responsePosiciones.data)
             }
             catch (err) {
-                console.log("err: ", err)
+                //console.log(err)
                 setError("No se pudo cargar la información del campeonato.")
             }
             finally {
@@ -40,6 +43,13 @@ const Home = () => {
 
         fetchDatos()
     }, [])
+
+    const handlePartidoDetalle = (active) => {
+        setShow(active);
+    }
+    const handlePartido = (partidoOnly) => {
+        setPartido(partidoOnly)
+    }
 
     return (
         <div className="min-h-screen bg-slate-900 text-white">
@@ -97,7 +107,7 @@ const Home = () => {
                         ) : (
                             <div className="flex flex-col gap-5">
                                 {jornadas.map((jornada) => (
-                                    <JornadaCard key={jornada.id} jornada={jornada} />
+                                    <JornadaCard key={jornada.id} jornada={jornada} handlePartido={handlePartido} handlePartidoDetalle={handlePartidoDetalle} />
                                 ))}
                             </div>
                         )}
@@ -109,6 +119,16 @@ const Home = () => {
                     <TablaPosiciones posiciones={posiciones} />
                 )}
             </div>
+            {
+                show &&
+                <PartidoDetalle
+                    {...{
+                        partido,
+                        handlePartidoDetalle,
+                        handlePartido
+                    }}
+                />
+            }
         </div>
     )
 }
