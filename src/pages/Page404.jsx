@@ -13,7 +13,7 @@ const Page404 = () => {
                 to="/"
                 className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-3 text-lg"
             >
-                Volver a la tienda
+                Volver al inicio
             </Link>
         </div>
     )

@@ -18,19 +18,19 @@ const TablaPosiciones = ({ posiciones = [] }) => {
     }
 
     return (
-        <div className="rounded-xl border border-slate-700 bg-slate-800 overflow-hidden">
+        <div className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
 
             {/* Cabecera */}
-            <div className="px-5 py-4 border-b border-slate-700">
-                <h2 className="text-sm font-semibold text-white">Tabla de Posiciones</h2>
-                <p className="text-xs text-slate-400 mt-0.5">{posiciones.length} equipos</p>
+            <div className="px-5 py-4 border-b border-slate-200">
+                <h2 className="text-sm font-bold text-slate-900">Tabla de Posiciones</h2>
+                <p className="text-xs text-slate-500 mt-0.5">{posiciones.length} equipos</p>
             </div>
 
             {/* Tabla */}
             <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                     <thead>
-                        <tr className="border-b border-slate-700 bg-slate-800/80">
+                        <tr className="border-b border-slate-200 bg-slate-50">
                             <th className="py-2.5 px-4 text-left text-xs text-slate-500 font-medium w-8">#</th>
                             <th className="py-2.5 px-4 text-left text-xs text-slate-500 font-medium">Equipo</th>
                             {columnas.map(col => (
@@ -48,7 +48,7 @@ const TablaPosiciones = ({ posiciones = [] }) => {
                         {posiciones.map((equipo, index) => (
                             <tr
                                 key={equipo.equipoId}
-                                className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors"
+                                className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
                             >
                                 {/* Posición */}
                                 <td className="py-3 px-4">
@@ -59,7 +59,7 @@ const TablaPosiciones = ({ posiciones = [] }) => {
 
                                 {/* Nombre */}
                                 <td className="py-3 px-4">
-                                    <span className={`text-sm font-medium ${index < 3 ? "text-white" : "text-slate-300"}`}>
+                                    <span className={`text-sm font-bold ${index < 3 ? "text-slate-900" : "text-slate-600"}`}>
                                         {equipo.equipo}
                                     </span>
                                 </td>
@@ -85,7 +85,7 @@ const TablaPosiciones = ({ posiciones = [] }) => {
             </div>
 
             {/* Leyenda */}
-            <div className="px-5 py-3 border-t border-slate-700 flex flex-wrap gap-x-5 gap-y-1">
+            <div className="px-5 py-3 border-t border-slate-200 flex flex-wrap gap-x-5 gap-y-1 bg-slate-50/50">
                 {columnas.map(col => (
                     <span key={col.key} className="text-[10px] text-slate-600">
                         <span className="text-slate-500 font-medium">{col.label}</span>: {col.title}

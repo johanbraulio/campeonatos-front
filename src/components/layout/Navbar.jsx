@@ -1,4 +1,4 @@
-import { LogOut, ShoppingBag, ShoppingCart } from "lucide-react"
+import { LogOut, ShoppingBag, ShoppingCart, Trophy } from "lucide-react"
 import { useAppStore } from "../../store/useAppStore"
 import { Link } from "react-router-dom"
 
@@ -11,27 +11,22 @@ const Navbar = () => {
             <div className="sticky top-0 w-full h-16 bg-slate-900 flex justify-between items-center px-2 z-50">
                 <div className="flex items-center gap-4">
                     <div className="flex justify-center items-center gap-2">
-                        <ShoppingBag className="w-6 h-6 text-indigo-600" />
+                        <Trophy className="w-6 h-6 text-indigo-600" />
                         <Link to="/">
-                            <h2 className="text-white font-extrabold text-lg">TechStore</h2>
+                            <h2 className="text-white font-extrabold text-lg">Campeonato</h2>
                         </Link>
                     </div>
                     <div>
-                        <Link to="/products" className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-lg text-xs cursor-pointer">
-                            Productos
-                        </Link>
-                    </div>
-                    <div>
-                        <Link to="/miscompras" className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-lg text-xs cursor-pointer">
-                            Mis Compras
+                        <Link to="/jugadores" className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-lg text-xs cursor-pointer">
+                            Getión de Jugadores
                         </Link>
                     </div>
 
                     {
-                        hasRole(["admin", "editor", "manager", "finance", "RRHH"]) &&
+                        hasRole(["ADMIN"]) &&
                         <div>
                             <Link to="/panel-admin" className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg text-xs cursor-pointer">
-                                Panel Admin
+                                Gestión de Partidos
                             </Link>
                         </div>
                     }

@@ -50,11 +50,11 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
     const handleOpen = () => setOpen(true);
 
     return (
-        <div className="rounded-lg border border-slate-700 bg-slate-900 flex flex-col">
+        <div className="rounded-lg border border-slate-200 bg-white shadow-sm flex flex-col transition-all hover:shadow-md">
 
             {/* Fecha y estado */}
-            <div className="flex items-center justify-between px-3 py-2 border-b border-slate-700">
-                <span className="text-xs text-slate-500">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100 bg-slate-50/50">
+                <span className="text-xs text-slate-500 font-medium">
                     {formatFecha(fechaHora)} · {formatHora(fechaHora)}
                 </span>
                 {esWo ? (
@@ -73,12 +73,12 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
                 {/* Equipo A */}
                 <div className={`flex-1 text-right ${finalizado && !esGanadorA ? "opacity-50" : ""}`}>
-                    <p className={`text-sm font-semibold leading-tight ${esGanadorA ? "text-white" : "text-slate-300"}`}>
-                        {esGanadorA && (
+                    <p className={`text-sm font-bold leading-tight ${esGanadorA ? "text-slate-900" : "text-slate-600"}`}>
+                        {/* {esGanadorA && (
                             <div className="flex items-center justify-end gap-1 mb-0.5">
                                 <Trophy className="w-3 h-3 text-yellow-400" />
                             </div>
-                        )}
+                        )} */}
                         {equipoANombre}
                     </p>
                 </div>
@@ -87,12 +87,12 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
                 <div className="shrink-0 text-center flex flex-col items-center">
                     {hayMarcador ? (
                         <>
-                            <div className="flex items-center gap-1">
-                                <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorA ? "text-white" : "text-slate-400"}`}>
+                            <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
+                                <span className={`text-lg font-bold tabular-nums w-6 text-center ${esGanadorA ? "text-slate-900" : "text-slate-500"}`}>
                                     {golesA}
                                 </span>
-                                <span className="text-slate-600 text-sm">-</span>
-                                <span className={`text-xl font-bold tabular-nums w-7 text-center ${esGanadorB ? "text-white" : "text-slate-400"}`}>
+                                <span className="text-slate-400 text-sm font-semibold">-</span>
+                                <span className={`text-lg font-bold tabular-nums w-6 text-center ${esGanadorB ? "text-slate-900" : "text-slate-500"}`}>
                                     {golesB}
                                 </span>
                             </div>
@@ -104,12 +104,12 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
                 {/* Equipo B */}
                 <div className={`flex-1 ${finalizado && !esGanadorB ? "opacity-50" : ""}`}>
-                    {esGanadorB && (
+                    {/* {esGanadorB && (
                         <div className="flex items-center gap-1 mb-0.5">
                             <Trophy className="w-3 h-3 text-yellow-400" />
                         </div>
-                    )}
-                    <p className={`text-sm font-semibold leading-tight ${esGanadorB ? "text-white" : "text-slate-300"}`}>
+                    )} */}
+                    <p className={`text-sm font-bold leading-tight ${esGanadorB ? "text-slate-900" : "text-slate-600"}`}>
                         {equipoBNombre}
                     </p>
                 </div>
@@ -117,9 +117,9 @@ const PartidoCard = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
             {/* Botón detalle - Solo si el partido ya se jugó */}
             {finalizado && (
-                <div className="border-t border-slate-700 px-3 py-2">
+                <div className="border-t border-slate-100 px-3 py-2 bg-slate-50/30 rounded-b-lg">
                     <button
-                        className="w-full text-xs text-slate-400 hover:text-slate-200 py-1 hover:bg-slate-700/50 rounded transition-colors cursor-pointer flex items-center justify-center gap-1"
+                        className="w-full text-xs font-semibold text-slate-500 hover:text-indigo-600 py-1.5 hover:bg-white border border-transparent hover:border-slate-200 hover:shadow-sm rounded transition-all cursor-pointer flex items-center justify-center gap-1"
                         onClick={() => {
                             handlePartidoDetalle(true)
                             handlePartido(partido)

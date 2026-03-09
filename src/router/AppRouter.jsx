@@ -6,6 +6,7 @@ import Unauthorized from "../pages/Unauthorized"
 import Page404 from "../pages/Page404"
 import Navbar from "../components/layout/Navbar"
 import ListadoPartidosPage from "../pages/Partidos/Listado"
+import ListadoJugadoresPage from "../pages/Jugadores/Listado"
 
 const AppRouter = () => {
 
@@ -34,6 +35,18 @@ const AppRouter = () => {
                                 :
                                 hasRole(["ADMIN"/* , "editor", "manager", "finance", "RRHH" */]) ?
                                     <ListadoPartidosPage />
+                                    :
+                                    <Unauthorized />
+                        }
+                    />
+                    <Route
+                        path="/jugadores"
+                        element={
+                            user === null ?
+                                <Navigate to="/login" />
+                                :
+                                hasRole(["ADMIN", "USER"]) ?
+                                    <ListadoJugadoresPage />
                                     :
                                     <Unauthorized />
                         }

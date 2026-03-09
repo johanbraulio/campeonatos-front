@@ -184,32 +184,32 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
     }
 
     return (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: "1rem" }}>
-            <div style={{ background: "#fff", borderRadius: 8, width: "100%", maxWidth: 850, maxHeight: "90vh", display: "flex", flexDirection: "column", border: "1px solid #ccc" }}>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4">
+            <div className="bg-white rounded-lg w-full max-w-[850px] max-h-[90vh] flex flex-col border border-slate-300 shadow-xl overflow-hidden">
 
                 {/* Header */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.9rem 1.2rem", borderBottom: "1px solid #ddd", background: "#f5f5f5" }}>
+                <div className="flex justify-between items-center px-5 py-3.5 border-b border-slate-200 bg-slate-50">
                     <div>
-                        <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700 }}>Editar Partido</h3>
-                        <small style={{ color: "#666" }}>
+                        <h3 className="m-0 text-base font-bold text-slate-900">Editar Partido</h3>
+                        <small className="text-slate-500 font-medium">
                             {partido.equipoANombre} vs {partido.equipoBNombre} · {partido.jornadaNumero}
                         </small>
                     </div>
-                    <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "#444", padding: 4 }}>
+                    <button onClick={onClose} className="bg-transparent border-0 cursor-pointer text-slate-500 hover:text-slate-800 p-1 hover:bg-slate-200 rounded transition-colors">
                         <X size={18} />
                     </button>
                 </div>
 
                 {loading ? (
-                    <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+                    <div className="p-8 text-center text-slate-500">
                         Cargando datos del partido...
                     </div>
                 ) : (
-                    <div style={{ overflowY: "auto", padding: "1rem 1.2rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <div className="overflow-y-auto px-5 py-4 flex flex-col gap-4">
 
                         {/* Toggle W.O. */}
-                        <div style={{ border: "1px solid #ddd", borderRadius: 6, padding: "0.75rem" }}>
-                            <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontWeight: 600 }}>
+                        <div className="border border-slate-200 rounded-md p-3">
+                            <label className="flex items-center gap-2 cursor-pointer font-semibold text-slate-700">
                                 <input
                                     type="checkbox"
                                     checked={esWO}
@@ -221,7 +221,7 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
                                 Marcar como W.O.
                             </label>
                             {esWO && (
-                                <p style={{ margin: "0.5rem 0 0", fontSize: "0.85rem", color: "#888" }}>
+                                <p className="mt-2 mb-0 text-sm text-slate-500">
                                     En partidos W.O. debes seleccionar manualmente el equipo ganador y los detalles de los jugadores serán ignorados.
                                 </p>
                             )}
@@ -229,9 +229,9 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
 
                         {/* Selección de ganador - solo si es W.O. */}
                         {esWO && (
-                            <div style={{ border: "1px solid #ddd", borderRadius: 6, padding: "0.75rem" }}>
-                                <p style={{ margin: "0 0 0.5rem", fontWeight: 600, fontSize: "0.9rem" }}>Equipo ganador (W.O.)</p>
-                                <div style={{ display: "flex", gap: "0.5rem" }}>
+                            <div className="border border-slate-200 rounded-md p-3">
+                                <p className="m-0 mb-2 font-semibold text-[0.9rem] text-slate-700">Equipo ganador (W.O.)</p>
+                                <div className="flex gap-2">
                                     {[
                                         { id: partido.equipoAId, nombre: partido.equipoANombre },
                                         { id: partido.equipoBId, nombre: partido.equipoBNombre }
@@ -239,17 +239,7 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
                                         <button
                                             key={eq.id}
                                             onClick={() => setEquipoGanadorId(String(eq.id))}
-                                            style={{
-                                                flex: 1,
-                                                padding: "0.5rem",
-                                                borderRadius: 6,
-                                                border: equipoGanadorId === String(eq.id) ? "2px solid #333" : "1px solid #ccc",
-                                                background: equipoGanadorId === String(eq.id) ? "#333" : "#fff",
-                                                color: equipoGanadorId === String(eq.id) ? "#fff" : "#333",
-                                                cursor: "pointer",
-                                                fontWeight: 600,
-                                                fontSize: "0.88rem",
-                                            }}
+                                            className={`flex-1 p-2 rounded-md font-semibold text-[0.88rem] cursor-pointer transition-colors ${equipoGanadorId === String(eq.id) ? "border-2 border-slate-800 bg-slate-800 text-white shadow-md" : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50"}`}
                                         >
                                             {eq.nombre} {equipoGanadorId === String(eq.id) ? "🏆" : ""}
                                         </button>
@@ -260,7 +250,7 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
 
                         {/* Controles de Jugadores - solo si NO es W.O. */}
                         {!esWO && (
-                            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                            <div className="flex flex-col gap-4">
                                 <TablaParticipaciones
                                     equipo="A"
                                     equipoNombre={partido.equipoANombre}
@@ -284,7 +274,7 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
                                 />
 
                                 {/* Info ganador calculado automáticamente */}
-                                <div style={{ background: "#f0f0f0", borderRadius: 6, padding: "0.6rem 0.75rem", fontSize: "0.85rem", color: "#555" }}>
+                                <div className="bg-slate-100 rounded-md py-2.5 px-3 text-sm text-slate-600 border border-slate-200 font-medium">
                                     {(() => {
                                         const id = calcularGanadorId()
                                         if (id === partido.equipoAId) return `🏆 Ganador calculado: ${partido.equipoANombre}`
@@ -299,17 +289,17 @@ const ModalEditarPartido = ({ partido, onClose, onGuardado }) => {
 
                 {/* Footer */}
                 {!loading && (
-                    <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem", padding: "0.75rem 1.2rem", borderTop: "1px solid #ddd", background: "#f9f9f9" }}>
+                    <div className="flex justify-end gap-2 px-5 py-3 border-t border-slate-200 bg-slate-50">
                         <button
                             onClick={onClose}
-                            style={{ padding: "0.45rem 1rem", border: "1px solid #ccc", borderRadius: 6, background: "#fff", cursor: "pointer" }}
+                            className="px-4 py-1.5 border border-slate-300 rounded-md bg-white cursor-pointer text-slate-700 hover:bg-slate-50 font-medium transition-colors"
                         >
                             Cancelar
                         </button>
                         <button
                             onClick={handleGuardar}
                             disabled={saving}
-                            style={{ padding: "0.45rem 1rem", border: "none", borderRadius: 6, background: "#333", color: "#fff", cursor: "pointer", fontWeight: 600, display: "flex", alignItems: "center", gap: "0.4rem", opacity: saving ? 0.7 : 1 }}
+                            className={`px-4 py-1.5 border-0 rounded-md bg-slate-800 text-white cursor-pointer font-semibold flex items-center gap-1.5 hover:bg-slate-900 transition-colors ${saving ? "opacity-70 pointer-events-none" : ""}`}
                         >
                             <Save size={15} />
                             {saving ? "Guardando..." : "Guardar"}

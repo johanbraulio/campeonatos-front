@@ -52,24 +52,24 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-900 text-white">
+        <div className="min-h-screen bg-slate-50 text-slate-900">
 
             {/* Header */}
-            <div className="border-b border-slate-700">
+            <div className="border-b border-slate-200 bg-white">
                 <div className="max-w-5xl mx-auto px-4 py-8">
-                    <h1 className="text-2xl font-bold text-white mb-1">Campeonato de Fútbol Sala</h1>
-                    <p className="text-slate-400 text-sm mb-6">Resultados y posiciones actualizados</p>
+                    <h1 className="text-2xl font-bold text-slate-900 mb-1">Campeonato de Fútbol Sala</h1>
+                    <p className="text-slate-500 text-sm mb-6">Resultados y posiciones actualizados</p>
 
                     {/* Tabs */}
-                    <div className="flex gap-1 border-b border-slate-700 -mb-px">
+                    <div className="flex gap-1 border-b border-slate-200 -mb-px">
                         {TABS.map(({ key, label, icon: Icon }) => (
                             <button
                                 key={key}
                                 onClick={() => setTabActivo(key)}
                                 className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors cursor-pointer
                                     ${tabActivo === key
-                                        ? "border-indigo-500 text-indigo-400"
-                                        : "border-transparent text-slate-400 hover:text-slate-300"
+                                        ? "border-indigo-600 text-indigo-600"
+                                        : "border-transparent text-slate-500 hover:text-slate-700"
                                     }`}
                             >
                                 <Icon className="w-4 h-4" />
@@ -85,7 +85,7 @@ const Home = () => {
 
                 {/* Cargando */}
                 {loading && (
-                    <div className="flex items-center justify-center py-20 gap-3 text-slate-400">
+                    <div className="flex items-center justify-center py-20 gap-3 text-slate-500">
                         <Loader2 className="w-5 h-5 animate-spin" />
                         <span className="text-sm">Cargando...</span>
                     </div>
@@ -93,7 +93,7 @@ const Home = () => {
 
                 {/* Error */}
                 {!loading && error && (
-                    <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-red-400 text-sm">
+                    <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-red-600 text-sm">
                         <AlertTriangle className="w-4 h-4 shrink-0" />
                         {error}
                     </div>

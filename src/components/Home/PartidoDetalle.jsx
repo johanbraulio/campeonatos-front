@@ -33,11 +33,11 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[1000] p-4">
-            <div className="bg-slate-800 rounded-lg w-full max-w-2xl overflow-hidden flex flex-col border border-slate-700">
+            <div className="bg-white rounded-lg w-full max-w-2xl overflow-hidden flex flex-col border border-slate-200 shadow-xl">
 
                 {/* Cabecera */}
-                <div className="flex justify-between items-center bg-slate-700 px-5 py-3">
-                    <h3 className="text-white font-bold text-lg">
+                <div className="flex justify-between items-center bg-slate-50 px-5 py-4 border-b border-slate-200">
+                    <h3 className="text-slate-900 font-bold text-lg">
                         Detalle del Partido
                     </h3>
                     <button
@@ -45,16 +45,16 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                             handlePartidoDetalle(false);
                             handlePartido(null);
                         }}
-                        className="text-slate-300 hover:text-white p-1 rounded-full hover:bg-slate-600 transition-colors cursor-pointer"
+                        className="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-200/50 transition-colors cursor-pointer"
                     >
                         <X className="w-5 h-5" />
                     </button>
                 </div>
 
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-16 text-slate-400 gap-3">
+                    <div className="flex flex-col items-center justify-center py-16 text-slate-500 gap-3">
                         <Loader2 className="w-8 h-8 animate-spin" />
-                        <span className="text-sm">Cargando detalles...</span>
+                        <span className="text-sm border-slate-200">Cargando detalles...</span>
                     </div>
                 ) : error ? (
                     <div className="flex items-center justify-center py-16 text-red-400 gap-2">
@@ -65,14 +65,14 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                     <div className="p-5 flex flex-col gap-6 overflow-y-auto max-h-[80vh]">
 
                         {/* Marcador Principal */}
-                        <div className="bg-slate-900 border border-slate-700 rounded-lg p-5 flex items-center justify-center gap-6">
+                        <div className="bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex items-center justify-center gap-6">
                             <div className="flex-1 text-right flex flex-col justify-center">
                                 {detalle.ganadorId === detalle.equipoAId && (
                                     <div className="flex items-center justify-end gap-1 mb-1 text-yellow-500 text-[10px] font-bold uppercase tracking-wider">
                                         <Trophy className="w-3 h-3" /> Ganador
                                     </div>
                                 )}
-                                <span className={`text-lg font-bold block ${detalle.ganadorId === detalle.equipoAId ? "text-white" : "text-slate-400"}`}>
+                                <span className={`text-xl font-bold block ${detalle.ganadorId === detalle.equipoAId ? "text-slate-900" : "text-slate-600"}`}>
                                     {detalle.equipoANombre}
                                 </span>
                             </div>
@@ -84,11 +84,11 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                     </div>
                                 )}
                                 <div className="flex items-center gap-3">
-                                    <div className="bg-slate-800 px-4 py-2 rounded text-2xl font-black text-white w-16 text-center shadow-inner">
+                                    <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg text-2xl font-black text-slate-900 w-16 text-center shadow-sm">
                                         {detalle.golesA}
                                     </div>
-                                    <span className="text-slate-500 font-bold">vs</span>
-                                    <div className="bg-slate-800 px-4 py-2 rounded text-2xl font-black text-white w-16 text-center shadow-inner">
+                                    <span className="text-slate-400 font-bold">vs</span>
+                                    <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg text-2xl font-black text-slate-900 w-16 text-center shadow-sm">
                                         {detalle.golesB}
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                         <Trophy className="w-3 h-3" /> Ganador
                                     </div>
                                 )}
-                                <span className={`text-lg font-bold block ${detalle.ganadorId === detalle.equipoBId ? "text-white" : "text-slate-400"}`}>
+                                <span className={`text-xl font-bold block ${detalle.ganadorId === detalle.equipoBId ? "text-slate-900" : "text-slate-600"}`}>
                                     {detalle.equipoBNombre}
                                 </span>
                             </div>
@@ -114,12 +114,12 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
                                 {/* Equipo A */}
                                 {detallesEquipoA.length > 0 && (
-                                    <div className="border border-slate-700 rounded overflow-hidden">
-                                        <div className="bg-slate-700/50 px-4 py-2 text-sm font-bold text-white">
+                                    <div className="border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                                        <div className="bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-200">
                                             {detalle.equipoANombre}
                                         </div>
-                                        <table className="w-full text-left text-sm text-slate-300">
-                                            <thead className="bg-slate-800/50 text-slate-400 text-xs uppercase">
+                                        <table className="w-full text-left text-sm text-slate-700 bg-white">
+                                            <thead className="bg-white border-b border-slate-100 text-slate-500 text-xs uppercase font-semibold">
                                                 <tr>
                                                     <th className="px-4 py-2">Jugador</th>
                                                     <th className="px-4 py-2 text-center w-16">Goles</th>
@@ -127,13 +127,13 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                                     <th className="px-4 py-2 text-center w-16">T.R.</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-slate-700/50">
+                                            <tbody className="divide-y divide-slate-100">
                                                 {detallesEquipoA.map((d) => (
-                                                    <tr key={d.id} className="hover:bg-slate-700/20">
+                                                    <tr key={d.id} className="hover:bg-slate-50 transition-colors">
                                                         <td className="px-4 py-2 font-medium">{d.nombreJugador}</td>
-                                                        <td className="px-4 py-2 text-center">{d.goles > 0 ? d.goles : "-"}</td>
-                                                        <td className="px-4 py-2 text-center text-amber-400">{d.ta > 0 ? d.ta : "-"}</td>
-                                                        <td className="px-4 py-2 text-center text-red-500">{(d.trd + d.tri) > 0 ? (d.trd + d.tri) : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-slate-900">{d.goles > 0 ? d.goles : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-amber-500">{d.ta > 0 ? d.ta : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-red-500">{(d.trd + d.tri) > 0 ? (d.trd + d.tri) : "-"}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -143,12 +143,12 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
 
                                 {/* Equipo B */}
                                 {detallesEquipoB.length > 0 && (
-                                    <div className="border border-slate-700 rounded overflow-hidden">
-                                        <div className="bg-slate-700/50 px-4 py-2 text-sm font-bold text-white">
+                                    <div className="border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                                        <div className="bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 border-b border-slate-200">
                                             {detalle.equipoBNombre}
                                         </div>
-                                        <table className="w-full text-left text-sm text-slate-300">
-                                            <thead className="bg-slate-800/50 text-slate-400 text-xs uppercase">
+                                        <table className="w-full text-left text-sm text-slate-700 bg-white">
+                                            <thead className="bg-white border-b border-slate-100 text-slate-500 text-xs uppercase font-semibold">
                                                 <tr>
                                                     <th className="px-4 py-2">Jugador</th>
                                                     <th className="px-4 py-2 text-center w-16">Goles</th>
@@ -156,13 +156,13 @@ const PartidoDetalle = ({ partido, handlePartido, handlePartidoDetalle }) => {
                                                     <th className="px-4 py-2 text-center w-16">T.R.</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-slate-700/50">
+                                            <tbody className="divide-y divide-slate-100">
                                                 {detallesEquipoB.map((d) => (
-                                                    <tr key={d.id} className="hover:bg-slate-700/20">
+                                                    <tr key={d.id} className="hover:bg-slate-50 transition-colors">
                                                         <td className="px-4 py-2 font-medium">{d.nombreJugador}</td>
-                                                        <td className="px-4 py-2 text-center">{d.goles > 0 ? d.goles : "-"}</td>
-                                                        <td className="px-4 py-2 text-center text-amber-400">{d.ta > 0 ? d.ta : "-"}</td>
-                                                        <td className="px-4 py-2 text-center text-red-500">{(d.trd + d.tri) > 0 ? (d.trd + d.tri) : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-slate-900">{d.goles > 0 ? d.goles : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-amber-500">{d.ta > 0 ? d.ta : "-"}</td>
+                                                        <td className="px-4 py-2 text-center font-bold text-red-500">{(d.trd + d.tri) > 0 ? (d.trd + d.tri) : "-"}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>

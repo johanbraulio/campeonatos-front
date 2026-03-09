@@ -41,8 +41,8 @@ const ListadoPartidos = () => {
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <div className="spinner"></div>
+            <div className="flex flex-col items-center justify-center p-16 text-slate-500 gap-4">
+                <div className="w-10 h-10 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin"></div>
                 <p>Cargando partidos...</p>
             </div>
         )
@@ -50,23 +50,23 @@ const ListadoPartidos = () => {
 
     if (error) {
         return (
-            <div className="error-container">
-                <p className="error-msg">⚠️ {error}</p>
+            <div className="p-8 text-center text-red-500">
+                <p className="font-semibold">⚠️ {error}</p>
             </div>
         )
     }
 
     return (
-        <div className="partidos-container">
-            <div className="partidos-header">
-                <h2 className="partidos-title">🏆 Listado de Partidos</h2>
-                <div className="filtro-group">
+        <div className="p-8 max-w-6xl mx-auto text-slate-900">
+            <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+                <h2 className="text-3xl font-bold text-slate-900 m-0">🏆 Listado de Partidos</h2>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
                     <label htmlFor="filtroJornada">Filtrar por jornada:</label>
                     <select
                         id="filtroJornada"
                         value={filtroJornada}
                         onChange={e => setFiltroJornada(e.target.value)}
-                        className="filtro-select"
+                        className="px-4 py-2 border border-slate-200 bg-white rounded-lg text-sm text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-medium"
                     >
                         {jornadas.map(j => (
                             <option key={j} value={j}>{j}</option>
@@ -75,66 +75,66 @@ const ListadoPartidos = () => {
                 </div>
             </div>
 
-            <div className="tabla-wrapper">
-                <table className="partidos-table">
-                    <thead>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+                <table className="w-full text-left border-collapse">
+                    <thead className="bg-slate-50 text-slate-600 border-b border-slate-200">
                         <tr>
-                            <th>#</th>
-                            <th>Jornada</th>
-                            <th>Equipo A</th>
-                            <th>Resultado</th>
-                            <th>Equipo B</th>
-                            <th>Estado</th>
-                            <th>W.O.</th>
-                            <th>Acciones</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">#</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Jornada</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Equipo A</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Resultado</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Equipo B</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Estado</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">W.O.</th>
+                            <th className="p-4 text-center font-semibold text-sm uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-slate-100">
                         {partidosFiltrados.length === 0 ? (
                             <tr>
-                                <td colSpan="8" className="no-data">
+                                <td colSpan="8" className="p-8 text-center text-slate-500 italic">
                                     No hay partidos para esta jornada.
                                 </td>
                             </tr>
                         ) : (
                             partidosFiltrados.map(partido => (
-                                <tr key={partido.partidoId}>
-                                    <td>{partido.partidoId}</td>
-                                    <td>
-                                        <span className="badge-jornada">
+                                <tr key={partido.partidoId} className="hover:bg-slate-50 transition-colors">
+                                    <td className="p-3 text-center text-slate-500 font-medium">{partido.partidoId}</td>
+                                    <td className="p-3 text-center">
+                                        <span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold border border-indigo-200">
                                             {partido.jornadaNumero}
                                         </span>
                                     </td>
-                                    <td className="equipo equipo-a">
+                                    <td className="p-3 text-center font-bold text-slate-700">
                                         {partido.equipoANombre}
                                     </td>
-                                    <td className="resultado">
+                                    <td className="p-3 text-center">
                                         {partido.golesA !== null && partido.golesB !== null
-                                            ? <span className="marcador">{partido.golesA} - {partido.golesB}</span>
-                                            : <span className="marcador pendiente">vs</span>
+                                            ? <span className="bg-slate-800 text-white px-3 py-1 rounded-full font-bold tracking-wider">{partido.golesA} - {partido.golesB}</span>
+                                            : <span className="bg-slate-100 text-slate-500 px-3 py-1 rounded-full font-bold border border-slate-200">vs</span>
                                         }
                                     </td>
-                                    <td className="equipo equipo-b">
+                                    <td className="p-3 text-center font-bold text-slate-700">
                                         {partido.equipoBNombre}
                                     </td>
-                                    <td>
-                                        <span className={`badge-estado ${partido.estado.toLowerCase()}`}>
+                                    <td className="p-3 text-center">
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase border ${partido.estado.toLowerCase() === 'jugado' ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-amber-50 text-amber-600 border-amber-200'}`}>
                                             {partido.estado}
                                         </span>
                                     </td>
-                                    <td>
+                                    <td className="p-3 text-center">
                                         {partido.esWO
-                                            ? <span className="badge-wo">W.O.</span>
-                                            : <span className="badge-normal">—</span>
+                                            ? <span className="bg-red-50 text-red-600 border border-red-200 px-2 py-1 rounded-full text-xs font-bold">W.O.</span>
+                                            : <span className="text-slate-400 text-lg">—</span>
                                         }
                                     </td>
-                                    <td>
+                                    <td className="p-3 text-center">
                                         <button
-                                            className="btn-editar"
+                                            className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 transition-colors shadow-sm"
                                             onClick={() => setPartidoSeleccionado(partido)}
                                             title="Editar partido"
                                         >
-                                            <Pencil size={15} />
+                                            <Pencil size={14} />
                                             Editar
                                         </button>
                                     </td>
@@ -145,8 +145,8 @@ const ListadoPartidos = () => {
                 </table>
             </div>
 
-            <div className="partidos-footer">
-                <p>Total de partidos: <strong>{partidosFiltrados.length}</strong></p>
+            <div className="mt-4 text-right text-slate-500 text-sm">
+                <p>Total de partidos: <strong className="text-slate-900">{partidosFiltrados.length}</strong></p>
             </div>
 
             {/* Modal de edición */}
@@ -157,193 +157,6 @@ const ListadoPartidos = () => {
                     onGuardado={cargarPartidos}
                 />
             )}
-
-            <style>{`
-                .partidos-container {
-                    padding: 2rem;
-                    max-width: 1100px;
-                    margin: 0 auto;
-                    font-family: 'Segoe UI', sans-serif;
-                }
-                .partidos-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1.5rem;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                }
-                .partidos-title {
-                    font-size: 1.8rem;
-                    font-weight: 700;
-                    color: #1e293b;
-                    margin: 0;
-                }
-                .filtro-group {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    font-size: 0.95rem;
-                    color: #475569;
-                }
-                .filtro-select {
-                    padding: 0.5rem 1rem;
-                    border: 2px solid #cbd5e1;
-                    border-radius: 8px;
-                    background: #fff;
-                    font-size: 0.95rem;
-                    color: #1e293b;
-                    cursor: pointer;
-                    transition: border-color 0.2s;
-                }
-                .filtro-select:focus {
-                    outline: none;
-                    border-color: #6366f1;
-                }
-                .tabla-wrapper {
-                    overflow-x: auto;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-                }
-                .partidos-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    background: #fff;
-                }
-                .partidos-table thead {
-                    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-                    color: #fff;
-                }
-                .partidos-table thead th {
-                    padding: 1rem 1.2rem;
-                    text-align: center;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                    letter-spacing: 0.05em;
-                    text-transform: uppercase;
-                }
-                .partidos-table tbody tr {
-                    border-bottom: 1px solid #f1f5f9;
-                    transition: background 0.15s;
-                }
-                .partidos-table tbody tr:hover {
-                    background: #f8fafc;
-                }
-                .partidos-table tbody td {
-                    padding: 0.85rem 1.2rem;
-                    text-align: center;
-                    color: #334155;
-                    font-size: 0.95rem;
-                }
-                .equipo {
-                    font-weight: 600;
-                    font-size: 0.95rem;
-                }
-                .equipo-a { color: #2563eb; }
-                .equipo-b { color: #dc2626; }
-                .marcador {
-                    background: #1e293b;
-                    color: #fff;
-                    padding: 0.3rem 0.8rem;
-                    border-radius: 20px;
-                    font-weight: 700;
-                    font-size: 1rem;
-                    letter-spacing: 0.05em;
-                }
-                .marcador.pendiente {
-                    background: #94a3b8;
-                }
-                .badge-jornada {
-                    background: #ede9fe;
-                    color: #7c3aed;
-                    padding: 0.25rem 0.7rem;
-                    border-radius: 20px;
-                    font-size: 0.82rem;
-                    font-weight: 600;
-                }
-                .badge-estado {
-                    padding: 0.25rem 0.75rem;
-                    border-radius: 20px;
-                    font-size: 0.82rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                }
-                .badge-estado.jugado {
-                    background: #dcfce7;
-                    color: #16a34a;
-                }
-                .badge-estado.pendiente {
-                    background: #fef9c3;
-                    color: #ca8a04;
-                }
-                .badge-wo {
-                    background: #fee2e2;
-                    color: #dc2626;
-                    padding: 0.25rem 0.6rem;
-                    border-radius: 20px;
-                    font-size: 0.82rem;
-                    font-weight: 700;
-                }
-                .badge-normal {
-                    color: #94a3b8;
-                    font-size: 1.1rem;
-                }
-                .btn-editar {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.35rem;
-                    padding: 0.4rem 0.85rem;
-                    border-radius: 8px;
-                    border: none;
-                    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-                    color: #fff;
-                    font-size: 0.82rem;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: opacity 0.2s, transform 0.15s;
-                    box-shadow: 0 2px 8px rgba(99,102,241,0.3);
-                }
-                .btn-editar:hover {
-                    opacity: 0.9;
-                    transform: translateY(-1px);
-                }
-                .no-data {
-                    color: #94a3b8;
-                    padding: 2rem;
-                    font-style: italic;
-                }
-                .partidos-footer {
-                    margin-top: 1rem;
-                    text-align: right;
-                    color: #64748b;
-                    font-size: 0.9rem;
-                }
-                .loading-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 4rem;
-                    color: #64748b;
-                    gap: 1rem;
-                }
-                .spinner {
-                    width: 40px;
-                    height: 40px;
-                    border: 4px solid #e2e8f0;
-                    border-top-color: #6366f1;
-                    border-radius: 50%;
-                    animation: spin 0.8s linear infinite;
-                }
-                @keyframes spin { to { transform: rotate(360deg); } }
-                .error-container {
-                    padding: 2rem;
-                    text-align: center;
-                }
-                .error-msg {
-                    color: #dc2626;
-                    font-size: 1rem;
-                }
-            `}</style>
         </div>
     )
 }
